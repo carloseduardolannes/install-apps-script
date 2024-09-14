@@ -1,0 +1,19 @@
+Como usar:
+
+1. Crie o arquivo do script:
+
+nano install_apps.sh
+
+2. Copie e cole o script no arquivo.
+
+3. Salve o arquivo e feche o editor.
+
+4. Torne o script executável:
+
+chmod +x install_apps.sh
+
+5. Execute o script:
+
+sudo ./install_apps.sh
+
+Esse script atualizará a lista de pacotes, instalará os aplicativos definidos na lista e removerá pacotes desnecessários ao final da instalação.
