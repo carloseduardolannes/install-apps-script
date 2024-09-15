@@ -27,16 +27,36 @@ sudo apt update
 
 # Lista de aplicativos para instalar
 apps=(
-    "git"          # Ferramenta de controle de versão
-    "curl"         # Ferramenta para transferir dados de ou para um servidor
-    "vim"          # Editor de texto poderoso e amplamente utilizado
-    "htop"         # Monitor de processos interativo no terminal
-    "gimp"         # Editor de imagens avançado
-    "vlc"          # Reprodutor de mídia versátil
-    "docker.io"    # Plataforma para automação de aplicativos usando containers
-    "python3-pip"  # Gerenciador de pacotes para Python
-    "code"         # Visual Studio Code, um editor de código poderoso
-    "geogebra-classic"  # Aplicativo de matemática dinâmico, GeoGebra
+    "git"                  # Ferramenta de controle de versão
+    "curl"                 # Ferramenta para transferir dados de ou para um servidor
+    "vim"                  # Editor de texto poderoso e amplamente utilizado
+    "htop"                 # Monitor de processos interativo no terminal
+    "gimp"                 # Editor de imagens avançado
+    "vlc"                  # Reprodutor de mídia versátil
+    "docker.io"            # Plataforma para automação de aplicativos usando containers
+    "python3-pip"          # Gerenciador de pacotes para Python
+    "code"                 # Visual Studio Code, editor de código poderoso
+    "geogebra-classic"      # Aplicativo de matemática dinâmico, GeoGebra
+    "anki"                 # Ferramenta de flashcards para auxiliar na memorização
+    "artha"                # Tesauro offline baseado no WordNet
+    "bibletime"            # Aplicativo de estudo bíblico
+    "celestia"             # Simulação espacial 3D
+    "chemtool"             # Programa para desenhar estruturas químicas
+    "epoptes"              # Ferramenta de monitoramento de laboratórios de informática
+    "gap"                  # Sistema de álgebra computacional
+    "gcompris"             # Software educacional para crianças
+    "gnome-dictionary"     # Dicionário para o ambiente GNOME
+    "octave"               # Linguagem de programação científica compatível com MATLAB
+    "gtypist"              # Instrutor de digitação em modo texto
+    "gnukhata"             # Software de contabilidade
+    "gperiodic"            # Tabela periódica para Linux
+    "klavaro"              # Tutor de digitação
+    "ktouch"               # Programa para aprender e praticar digitação
+    "marble"               # Globo virtual e atlas mundial
+    "maxima"               # Software de manipulação de expressões simbólicas e numéricas
+    "stellarium"           # Planetário open-source
+    "ugene"                # Software de bioinformática com GUI
+    "veyon"                # Gerenciamento de computadores em sala de aula
 )
 
 # Instala os aplicativos
@@ -45,6 +65,15 @@ for app in "${apps[@]}"; do
     echo "Instalando $app..."
     sudo apt install -y $app
 done
+
+# Aplicativos adicionais que exigem instalações manuais
+echo "Instalando aplicativos adicionais..."
+
+# Google Earth
+echo "Instalando Google Earth..."
+wget -q https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb
+sudo apt install -y ./google-earth-pro-stable_current_amd64.deb
+rm google-earth-pro-stable_current_amd64.deb
 
 # Limpeza após a instalação
 echo "Limpando pacotes desnecessários..."
