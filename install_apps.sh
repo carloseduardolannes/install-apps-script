@@ -34,7 +34,7 @@ install_apps() {
 
 # Categorias de aplicativos
 dev_tools=("git" "python3" "arduino" "netbeans" "pycharm" "jupyter-notebook")  # Lista de ferramentas de desenvolvimento
-edu_tools=("gcompris" "kturtle" "kgeography" "minuet" "blinken" "kstars" "ktechlab" "step" "marble" "geogebra" "maxima" "gnu-typist" "anki" "celestia" "chemtool" "gperiodic" "scipy" "scratch" "musescore")  # Lista de ferramentas educacionais com MuseScore
+edu_tools=("gcompris" "kturtle" "kgeography" "minuet" "blinken" "kstars" "ktechlab" "step" "marble" "geogebra" "maxima" "gnu-typist" "anki" "celestia" "chemtool" "gperiodic" "scipy" "scratch" "musescore")  # Lista de ferramentas educacionais
 sys_tools=("htop" "veyon" "putty")  # Lista de ferramentas de gerenciamento de sistemas
 utility_tools=("kmag" "convertall" "sweethome3d" "anbox")  # Lista de ferramentas de utilidade
 office_tools=("libreoffice")  # Lista de ferramentas de escritório
