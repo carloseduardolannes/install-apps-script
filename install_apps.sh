@@ -9,13 +9,27 @@ fi
 # Atualiza a lista de pacotes
 sudo apt update  # Atualiza a lista de pacotes disponíveis para garantir que estamos instalando as versões mais recentes
 
-# Função para instalar os aplicativos
+# Função para instalar os aplicativos e capturar erros
 install_apps() {
     local category=("$@")  # Recebe a lista de aplicativos a serem instalados como argumento
+    local failed_apps=()  # Lista para armazenar aplicativos que falharam na instalação
+
     for app in "${category[@]}"; do  # Itera sobre cada aplicativo na lista
         echo "Instalando $app..."  # Exibe uma mensagem indicando o aplicativo que está sendo instalado
-        sudo apt install -y $app  # Instala o aplicativo usando o apt; -y confirma automaticamente a instalação
+        if ! sudo apt install -y $app 2>> install_errors.log; then  # Tenta instalar o aplicativo e captura erros
+            echo "Erro ao instalar $app"  # Exibe uma mensagem de erro se a instalação falhar
+            failed_apps+=("$app")  # Adiciona o aplicativo à lista de falhas
+        fi
     done
+
+    # Exibe erros acumulados, se houver
+    if [ ${#failed_apps[@]} -ne 0 ]; then
+        echo "Os seguintes aplicativos apresentaram erros durante a instalação:"  # Exibe uma mensagem indicando que há erros
+        for failed_app in "${failed_apps[@]}"; do
+            echo " - $failed_app"  # Exibe cada aplicativo que falhou na instalação
+        done
+        echo "Veja o arquivo install_errors.log para mais detalhes."  # Informa ao usuário sobre o arquivo de log de erros
+    fi
 }
 
 # Categorias de aplicativos
@@ -49,12 +63,16 @@ install_apps "${sys_tools[@]}"  # Chama a função install_apps para instalar os
 # Instalação de aplicativos adicionais (Google Earth)
 echo "Instalando Google Earth..."  # Exibe uma mensagem indicando que a instalação do Google Earth está começando
 wget -q https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb  # Baixa o pacote .deb do Google Earth de forma silenciosa
-sudo apt install -y ./google-earth-pro-stable_current_amd64.deb  # Instala o pacote .deb do Google Earth usando o apt; -y confirma automaticamente a instalação
+if ! sudo apt install -y ./google-earth-pro-stable_current_amd64.deb 2>> install_errors.log; then  # Tenta instalar o pacote .deb e captura erros
+    echo "Erro ao instalar Google Earth"  # Exibe uma mensagem de erro se a instalação falhar
+fi
 rm google-earth-pro-stable_current_amd64.deb  # Remove o arquivo .deb após a instalação para liberar espaço
 
 # Instalação de Veyon e configuração de Wayland
 echo "Instalando Veyon..."  # Exibe uma mensagem indicando que a instalação do Veyon está começando
-sudo apt install -y veyon  # Instala o Veyon usando o apt; -y confirma automaticamente a instalação
+if ! sudo apt install -y veyon 2>> install_errors.log; then  # Tenta instalar o Veyon e captura erros
+    echo "Erro ao instalar Veyon"  # Exibe uma mensagem de erro se a instalação falhar
+fi
 
 # Edita o arquivo custom.conf para desativar o Wayland e configurar o login automático
 echo "Configurando /etc/gdm3/custom.conf..."  # Exibe uma mensagem indicando que a configuração do arquivo custom.conf está começando
